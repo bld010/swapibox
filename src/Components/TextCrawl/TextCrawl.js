@@ -1,10 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './TextCrawl.scss'
 
 const TextCrawl = (props) => {
 
+
+
   return(
-    <p>{This is where the movie will go}</p>
+    <section className="TextCrawl">
+      <p>{props.movie && props.movie.opening_crawl}</p>
+      <p>{props.movie && props.movie.title}</p>
+      <p>{props.movie && props.movie.release_date}</p>
+    </section>
   )
 }
 

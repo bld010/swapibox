@@ -29,7 +29,7 @@ class App extends Component {
   render() {
     return (
         <div className="App">
-          <Header favoritesCount={this.state.favorites.length}/>
+          <Header favoritesCount={this.state.favorites.length} movie={this.state.movie}/>
         </div>
     )
     }

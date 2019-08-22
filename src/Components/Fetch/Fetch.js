@@ -21,17 +21,14 @@ const fetchMovie = (updateMovie) => {
     updateMovie(cleanMovie)
   }
 
-  
-
-
-    fetch(movieURL)
-      .then(resp => resp.json())
-      .then(data => {
-        movie = data
-        return data
-      })
-      .then(data => cleanMovie())
-      .catch(error => console.log(error))
+  fetch(movieURL)
+    .then(resp => resp.json())
+    .then(data => {
+      movie = data
+      return data
+    })
+    .then(data => cleanMovie())
+    .catch(error => console.log(error))
 
 }
 

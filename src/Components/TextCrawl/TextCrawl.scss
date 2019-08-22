@@ -1,0 +1,8 @@
+.TextCrawl {
+  width: 400px;
+  color: goldenrod;
+  & p {
+
+    text-justify: inter-character;
+  }
+}
