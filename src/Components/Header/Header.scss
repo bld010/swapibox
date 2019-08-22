@@ -1,25 +1,30 @@
 $main-color: green;
 $button-hover-color: lightgreen;
+$title-color: goldenrod;
 
 .Header {
-  border-bottom: 1px solid black;
-  background: grey;
+  border-bottom: 1px solid white;
+  background: black;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 
+
   & h1 {
     margin: 0px 0px 10px 0px;
     padding: 10px;
+    color: $title-color;
   }
   & nav {
-    margin: -2px 100px 20px 10px;
-    padding: 150px 10px 10px 20px;
+    margin: -15px 0px 20px 0px;
+    padding: 80px 10px 10px 20px;
     display: flex;
     flex-direction: column;
     width: 250px;
-    border: 1px solid $main-color;
+    border: 2px solid $main-color;
     background: black;
+    box-shadow: 0px 0px 8px 3px rgb(67, 165, 71);
+    border-radius: 5px;
 
     & button {
       margin: 5px 25px;

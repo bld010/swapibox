@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 
 
-export const fetchCards = (url, filterType, updateAppState) => {
+export const fetchCards = (url, filterType, updateCardContainerState) => {
 
   let objToReturn = null
 
@@ -36,7 +36,7 @@ export const fetchCards = (url, filterType, updateAppState) => {
           });
       });
       return Promise.all(speciesPromises).then(resp =>
-        updateAppState('people', objToReturn))
+        updateCardContainerState('people', objToReturn))
     }
 
   
@@ -123,5 +123,9 @@ export const fetchMovie = (updateAppState) => {
 
 fetchMovie.propTypes = {
   updateAppState: PropTypes.func,
+}
+
+fetchCards.propTypes = {
+  updateCardContainerState: PropTypes.func
 }
 

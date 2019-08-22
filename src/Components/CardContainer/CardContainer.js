@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { fetchCards } from '../Fetch/Fetch'
+import { fetchCards } from '../Fetch/Fetch';
+import Card from '../Card/Card';
+import './CardContainer.scss'
 
 class CardContainer extends Component {
   constructor(props) {
@@ -8,19 +10,29 @@ class CardContainer extends Component {
     this.state = {
       filterType: 'people',
       isLoading: true,
+      people: []
+      // planets:
+      // vehicles:
     }
-    this.updateAppState = this.props.updateAppState
+    // this.updateAppState = this.props.updateAppState
+  }
+
+  updateCardContainerState = (propertyName, value) => {
+    this.setState({
+      [propertyName]: value,
+      isLoading: false,
+    })
   }
 
   componentDidMount()  {
     if (this.state.filterType === 'people') {
-      fetchCards('https://swapi.co/api/people/', this.state.filterType, this.updateAppState)
+      fetchCards('https://swapi.co/api/people/', this.state.filterType, this.updateCardContainerState)
     }
     if (this.state.filterType === 'planets') {
-      fetchCards('https://swapi.co/api/planets/', this.state.filterType, this.updateAppState)
+      fetchCards('https://swapi.co/api/planets/', this.state.filterType, this.updateCardContainerState)
     }
     if (this.state.filterType === 'vehicles') {
-      fetchCards('https://swapi.co/api/planets/', this.state.filterType, this.updateAppState)
+      fetchCards('https://swapi.co/api/planets/', this.state.filterType, this.updateCardContainerState)
     }
     if (this.state.filterType === 'favorites') {
       // displayFavorites()
@@ -30,7 +42,19 @@ class CardContainer extends Component {
 
   render() {
     return(
-      <p>This is the card container and this should be a loading image</p>
+      <section className="CardContainer">
+          {this.state.people && this.state.people.map(person => 
+          <Card 
+            key={person.name} 
+            name={person.name} 
+            homeworld={person.homeworld}
+            species={person.species}
+            language={person.language}
+            population={person.population}/>
+          )}
+    
+        {this.state.isLoading && <p>Loading ...</p>}
+      </section>
     )
   }
 }
