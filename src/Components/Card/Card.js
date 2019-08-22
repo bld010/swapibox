@@ -12,6 +12,7 @@ const Card = (props) => {
       <p>| {species}</p>
       <p>| {homeworld} ({population})</p>
       <p>| {language}</p>
+      <button></button>
     </article>
   )
 }
