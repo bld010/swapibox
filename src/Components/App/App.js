@@ -14,10 +14,9 @@ class App extends Component {
       vehicles: null,
       favorites: [],
     }
-    this.updateAppState = this.updateAppState.bind(this)
   }
 
-  updateAppState(stateProperty, stateValue) {
+  updateAppState = (stateProperty, stateValue) => {
     this.setState({
       [stateProperty]: stateValue
     })

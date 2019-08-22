@@ -6,9 +6,10 @@ class CardContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      filterType: '',
-      isLoading: true
+      filterType: 'people',
+      isLoading: true,
     }
+    this.updateAppState = this.props.updateAppState
   }
 
   componentDidMount()  {
