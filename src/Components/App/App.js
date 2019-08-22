@@ -9,7 +9,7 @@ class App extends Component {
     super(); 
     this.state = {
       planets: null,
-      people: [],
+      people: null,
       movie: null,
       vehicles: null,
       favorites: [],
@@ -30,7 +30,7 @@ class App extends Component {
     return (
         <div className="App">
           <Header favoritesCount={this.state.favorites.length} movie={this.state.movie} updateAppState={this.updateAppState} />
-          <CardContainer people={this.state.people} />
+          <CardContainer cards={this.state.people} updateAppState={this.updateAppState} />
         </div>
     )
     }

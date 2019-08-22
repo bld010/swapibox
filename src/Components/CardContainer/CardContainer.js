@@ -10,23 +10,19 @@ class CardContainer extends Component {
     this.state = {
       filterType: 'people',
       isLoading: true,
-      people: []
-      // planets:
-      // vehicles:
     }
-    // this.updateAppState = this.props.updateAppState
+    this.updateAppState = this.props.updateAppState
   }
 
-  updateCardContainerState = (propertyName, value) => {
+  updateCardContainerState = () => {
     this.setState({
-      [propertyName]: value,
       isLoading: false,
     })
   }
 
   componentDidMount()  {
     if (this.state.filterType === 'people') {
-      fetchCards('https://swapi.co/api/people/', this.state.filterType, this.updateCardContainerState)
+      fetchCards('https://swapi.co/api/people/', this.state.filterType, this.updateCardContainerState, this.updateAppState)
     }
     if (this.state.filterType === 'planets') {
       fetchCards('https://swapi.co/api/planets/', this.state.filterType, this.updateCardContainerState)
@@ -43,14 +39,10 @@ class CardContainer extends Component {
   render() {
     return(
       <section className="CardContainer">
-          {this.state.people && this.state.people.map(person => 
+          {this.props.cards !== null && this.props.cards.map(card => 
           <Card 
-            key={person.name} 
-            name={person.name} 
-            homeworld={person.homeworld}
-            species={person.species}
-            language={person.language}
-            population={person.population}/>
+            key={card.name} 
+            {...card}/>
           )}
     
         {this.state.isLoading && <p>Loading ...</p>}
