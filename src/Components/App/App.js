@@ -14,7 +14,7 @@ class App extends Component {
       movie: null,
       vehicles: null,
       favorites: [],
-      filterType: 'people',
+      filterType: 'planets',
       isLoading: true
     }
   }

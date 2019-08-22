@@ -40,35 +40,54 @@ export const fetchCards = (url, filterType, updateAppState) => {
         
     }
 
-  
+  const cleanPlanets = (planets) => {
 
-  // const fetchResidents = (planetsArray) => {
-  //   objToReturn= planetsArray;
-  //     objToReturn.map(planet => {
-  //       let residentsPromises = planet.residents.map(resident => {
-  //         return fetch(resident)
-  //           .then(resp => resp.json())
-  //           .then(resp => resp.name)
-  //           .catch(error => console.log('errorFetchingREsidents'))
-  //       });
-  //       Promise.all(residentsPromises)
-  //         .then(resp => {
-  //           planet.residents = resp;
-  //           console.log(objToReturn, "planet");
-  //         })
-  //         .then(resp =>
-  //           console.log("this is where I should fire the cleaner function")
-  //         );
-  //   })
-  // }
+    let cleanedPlanets = planets.map(planet => {
+
+      const {
+        name,
+        terrain,
+        population,
+        climate,
+        residents
+      } = planet;
+      return {
+        name,
+        terrain,
+        population,
+        climate,
+        residents
+      }
+    })
+    updateAppState('planets', cleanedPlanets);
+    updateAppState('isLoading', false)
+  }
+
+  const fetchResidents = (planetsArray) => {
+    objToReturn= planetsArray;
+      objToReturn.map(planet => {
+        let residentsPromises = planet.residents.map(resident => {
+          return fetch(resident)
+            .then(resp => resp.json())
+            .then(resp => resp.name)
+            .catch(error => console.log('errorFetchingREsidents'))
+        });
+        Promise.all(residentsPromises)
+          .then(resp => {
+            planet.residents = resp;
+            console.log(objToReturn)
+            cleanPlanets(objToReturn)
+          })
+    })
+  }
 
   const callSecondaryFetches = (responseData) => {
     if (filterType === 'people') {
       fetchHomeworldAndPopulation(responseData)
     }
-    // if (filterType === 'planets') {
-    //   fetchResidents(responseData)
-    // }
+    if (filterType === 'planets') {
+      fetchResidents(responseData)
+    }
   }
 
   fetch(url)

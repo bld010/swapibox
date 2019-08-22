@@ -7,18 +7,13 @@ const CardContainer = ({ cards, isLoading }) => {
 
   return(
     <section className="CardContainer">
-        {cards !== null && cards.map(card => 
-        <Card 
-          key={card.name} 
-          {...card}/>
-        )}
-  
+      {cards !== null && cards.map(card => 
+        <Card key={card.name} {...card}/>
+      )}
       {isLoading && <p>Loading ...</p>}
     </section>
   )
 }
-
-
 
 export default CardContainer;
 
