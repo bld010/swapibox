@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './App.scss';
 import Header from '../Header/Header';
-// import { fetchMovie } from '../Fetch/Fetch';
 import CardContainer from '../CardContainer/CardContainer';
+import { fetchMovie } from '../Fetch/Fetch';
+
 
 class App extends Component {
   constructor() {
@@ -23,13 +24,13 @@ class App extends Component {
   }
 
   componentDidMount() {
-    
+    fetchMovie(this.updateAppState)
   }
 
   render() {
     return (
         <div className="App">
-          <Header favoritesCount={this.state.favorites.length} movie={this.state.movie} updateAppState={this.updateAppState} />
+          <Header favoritesCount={this.state.favorites.length} movie={this.state.movie} />
           <CardContainer cards={this.state.people} updateAppState={this.updateAppState} />
         </div>
     )
