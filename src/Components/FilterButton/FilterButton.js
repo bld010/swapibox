@@ -12,8 +12,6 @@ const FilterButton = (props) => {
   )
 }
 
-
-
 export default FilterButton;
 
 FilterButton.propTypes = {

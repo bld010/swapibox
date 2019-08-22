@@ -47,7 +47,12 @@ class App extends Component {
     return (
         <div className="App">
           <Header favoritesCount={this.state.favorites.length} movie={this.state.movie} />
-          <CardContainer cards={this.state.people} updateAppState={this.updateAppState} />
+          <CardContainer 
+            cards={this.state.people} 
+            updateAppState={this.updateAppState} 
+            isLoading={this.state.isLoading}
+            filterType={this.state.filterType}
+            />
         </div>
     )
     }

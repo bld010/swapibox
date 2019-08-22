@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types';
 
-
-
 export const fetchCards = (url, filterType, updateAppState) => {
 
   let objToReturn = null

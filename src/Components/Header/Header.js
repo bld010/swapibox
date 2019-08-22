@@ -3,7 +3,6 @@ import './Header.scss';
 import PropTypes from 'prop-types';
 import TextCrawl from '../TextCrawl/TextCrawl'
 import FilterButton from '../FilterButton/FilterButton';
-import { fetchMovie } from '../Fetch/Fetch';
 import { NavLink } from 'react-router-dom';
 
 const Header = ({ movie, favoritesCount }) => {
