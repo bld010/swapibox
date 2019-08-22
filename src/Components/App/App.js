@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.scss';
 import Header from '../Header/Header';
 import CardContainer from '../CardContainer/CardContainer';
-import { fetchMovie } from '../Fetch/Fetch';
+import { fetchMovie, fetchCards } from '../Fetch/Fetch';
 
 
 class App extends Component {
@@ -14,6 +14,8 @@ class App extends Component {
       movie: null,
       vehicles: null,
       favorites: [],
+      filterType: 'people',
+      isLoading: true
     }
   }
 
@@ -25,6 +27,20 @@ class App extends Component {
 
   componentDidMount() {
     fetchMovie(this.updateAppState)
+
+    if (this.state.filterType === 'people') {
+      fetchCards('https://swapi.co/api/people/', this.state.filterType, this.updateAppState)
+    }
+    if (this.state.filterType === 'planets') {
+      fetchCards('https://swapi.co/api/planets/', this.state.filterType, this.updateAppState)
+    }
+    if (this.state.filterType === 'vehicles') {
+      fetchCards('https://swapi.co/api/planets/', this.state.filterType, this.updateAppState)
+    }
+    if (this.state.filterType === 'favorites') {
+      // displayFavorites()
+      // add conditional to show prompt to add favorites if none
+    }
   }
 
   render() {

@@ -21,19 +21,7 @@ class CardContainer extends Component {
   }
 
   componentDidMount()  {
-    if (this.state.filterType === 'people') {
-      fetchCards('https://swapi.co/api/people/', this.state.filterType, this.updateCardContainerState, this.updateAppState)
-    }
-    if (this.state.filterType === 'planets') {
-      fetchCards('https://swapi.co/api/planets/', this.state.filterType, this.updateCardContainerState)
-    }
-    if (this.state.filterType === 'vehicles') {
-      fetchCards('https://swapi.co/api/planets/', this.state.filterType, this.updateCardContainerState)
-    }
-    if (this.state.filterType === 'favorites') {
-      // displayFavorites()
-      // add conditional to show prompt to add favorites if none
-    }
+ 
   }
 
   render() {
