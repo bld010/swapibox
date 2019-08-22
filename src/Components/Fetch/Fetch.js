@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 
 
 
-const fetchMovie = (updateMovie) => { 
+const fetchMovie = (updateAppState) => { 
 
   let movie = null;
   let movieURL = 'https://swapi.co/api/films/' + getRandomMovieID();
@@ -18,7 +18,8 @@ const fetchMovie = (updateMovie) => {
       opening_crawl,
       release_date
     }
-    updateMovie(cleanMovie)
+    
+    updateAppState('movie', cleanMovie)
   }
 
   fetch(movieURL)
