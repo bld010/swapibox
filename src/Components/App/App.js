@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
 import Header from '../Header/Header';
-import fetchMovie from '../Fetch/Fetch';
+// import { fetchMovie } from '../Fetch/Fetch';
 import CardContainer from '../CardContainer/CardContainer';
 
 class App extends Component {
@@ -24,14 +24,14 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetchMovie(this.updateAppState)
+    
   }
 
   render() {
     return (
         <div className="App">
-          <Header favoritesCount={this.state.favorites.length} movie={this.state.movie}/>
-          <CardContainer />
+          <Header favoritesCount={this.state.favorites.length} movie={this.state.movie} updateAppState={this.updateAppState} />
+          <CardContainer updateAppState={this.updateAppState} />
         </div>
     )
     }
