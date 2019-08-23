@@ -4,7 +4,10 @@ import './Card.scss'
 
 const Card = (props) => {
 
-  let { name, species, homeworld, population, language } = props
+  let { name, 
+    species, 
+    homeworld, 
+    population, language, terrain } = props
 
   return(
     <article className="Card">
@@ -12,6 +15,7 @@ const Card = (props) => {
       <p>| {species}</p>
       <p>| {homeworld} ({population})</p>
       <p>| {language}</p>
+      <p>{terrain}</p>
       <button></button>
     </article>
   )
@@ -19,4 +23,6 @@ const Card = (props) => {
 
 export default Card;
 
-//PropTypes here
+Card.propTypes = {
+  
+}
