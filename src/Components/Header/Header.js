@@ -13,16 +13,16 @@ const Header = ({ movie, favoritesCount }) => {
         {movie !== null && <TextCrawl movie={movie}/>}
       <nav>
         <NavLink to="/people">
-          <FilterButton filterType="people"/>
+          people
         </NavLink>
         <NavLink to="/planets">
-          <FilterButton filterType="planets"/>
+          planets
         </NavLink>
         <NavLink to="/vehicles">
-          <FilterButton filterType="vehicles" />
+          vehicles
         </NavLink>
         <NavLink to="/favorites">
-          <FilterButton filterType="favorites" favoritesCount={favoritesCount} />
+          favorites | {favoritesCount} />
         </NavLink>
       </nav>
     </header>

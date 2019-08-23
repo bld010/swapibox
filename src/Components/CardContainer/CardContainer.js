@@ -4,14 +4,13 @@ import Card from '../Card/Card';
 import './CardContainer.scss'
 
 const CardContainer = ({ cards, isLoading }) => {
-  console.log(cards)
   return(
     <section className="CardContainer">
       {cards !== null && cards.map(card => 
         <Card key={card.name} {...card}/>
         
       )}
-      {isLoading && <p>Loading ...</p>}
+      {cards === null && <p>Loading ...</p>}
     </section>
   )
 }

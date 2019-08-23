@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-export const fetchCards = (url, filterType, updateAppState) => {
+export const fetchCards = (url, updateAppState, dataType) => {
 
   let objToReturn = null
 
@@ -70,7 +70,7 @@ export const fetchCards = (url, filterType, updateAppState) => {
           return fetch(resident)
             .then(resp => resp.json())
             .then(resp => resp.name)
-            .catch(error => console.log('errorFetchingREsidents'))
+            .catch(error => console.log('error Fetching Residents'))
         });
         Promise.all(residentsPromises)
           .then(resp => {
@@ -81,14 +81,28 @@ export const fetchCards = (url, filterType, updateAppState) => {
     })
   }
 
+  const cleanVehicles = (responseData) => {
+    const cleanVehicles = responseData.map(vehicle => {
+      const { name, model, vehicle_class, passengers } = vehicle
+
+      return { name, model, vehicle_class, passengers }
+    })
+    
+    updateAppState('vehicles', cleanVehicles )
+  }
+    
   const callSecondaryFetches = (responseData) => {
-    if (filterType === 'people') {
+    if (dataType === 'people') {
       fetchHomeworldAndPopulation(responseData)
     }
-    if (filterType === 'planets') {
+    if (dataType === 'planets') {
       fetchResidents(responseData)
     }
-  }
+    if (dataType === 'vehicles') {
+      cleanVehicles(responseData)
+    }
+    }
+  
 
   fetch(url)
     .then(resp => resp.json())

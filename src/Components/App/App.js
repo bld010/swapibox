@@ -15,7 +15,6 @@ class App extends Component {
       movie: null,
       vehicles: null,
       favorites: [],
-      filterType: 'planets',
       isLoading: true
     }
   }
@@ -28,21 +27,11 @@ class App extends Component {
 
   componentDidMount() {
     fetchMovie(this.updateAppState)
-
-    if (this.state.filterType === 'people') {
-      fetchCards('https://swapi.co/api/people/', this.state.filterType, this.updateAppState)
-    }
-    if (this.state.filterType === 'planets') {
-      fetchCards('https://swapi.co/api/planets/', this.state.filterType, this.updateAppState)
-    }
-    if (this.state.filterType === 'vehicles') {
-      fetchCards('https://swapi.co/api/planets/', this.state.filterType, this.updateAppState)
-    }
-    if (this.state.filterType === 'favorites') {
-      // displayFavorites()
-      // add conditional to show prompt to add favorites if none
-    }
+    fetchCards('https://swapi.co/api/people/', this.updateAppState, 'people')
+    fetchCards('https://swapi.co/api/planets/',  this.updateAppState, 'planets')
+    fetchCards('https://swapi.co/api/vehicles/', this.updateAppState, 'vehicles')
   }
+  
 
   render() {
     return (
