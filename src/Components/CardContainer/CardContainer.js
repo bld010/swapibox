@@ -19,5 +19,6 @@ export default CardContainer;
 
 CardContainer.propTypes = {
   isLoading: PropTypes.bool,
-  cards: PropTypes.array
+  cards: PropTypes.array,
+  type: PropTypes.string
 }

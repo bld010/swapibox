@@ -72,5 +72,16 @@ const Card = (props) => {
 export default Card;
 
 Card.propTypes = {
-  type: PropTypes.string
+  type: PropTypes.string,
+  name: PropTypes.string,
+  species:  PropTypes.string,
+  homeworld:  PropTypes.string,
+  population:  PropTypes.string,
+  language:  PropTypes.string,
+  terrain:  PropTypes.string,
+  model:  PropTypes.string,
+  vehicle_class:  PropTypes.string,
+  residents: PropTypes.array,
+  climate:  PropTypes.string,
+  passengers:  PropTypes.string,
 }

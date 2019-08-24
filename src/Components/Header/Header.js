@@ -28,8 +28,6 @@ const Header = ({ movie, favoritesCount }) => {
   )
 }
 
-
-
 export default Header;
 
 Header.propTypes = {
