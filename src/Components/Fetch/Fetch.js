@@ -75,7 +75,6 @@ export const fetchCards = (url, updateAppState, dataType) => {
         Promise.all(residentsPromises)
           .then(resp => {
             planet.residents = resp;
-            console.log(objToReturn)
             cleanPlanets(objToReturn)
           })
     })
@@ -122,7 +121,6 @@ export const fetchCards = (url, updateAppState, dataType) => {
 
 
 export const fetchMovie = (updateAppState) => { 
-  console.log(updateAppState)
 
   const getRandomMovieID = () => {
     return Math.floor(Math.random() * Math.floor(7) + 1);
@@ -146,7 +144,6 @@ export const fetchMovie = (updateAppState) => {
     .then(resp => resp.json())
     .then(data => {
       movie = data
-      console.log(data)
       return data
     })
     .then(data => cleanMovie())

@@ -43,15 +43,15 @@ class App extends Component {
           }} />
 
           <Route path='/people' render={() => {
-            return <CardContainer cards={this.state.people} isLoading={this.state.isLoading} />
+            return <CardContainer cards={this.state.people} isLoading={this.state.isLoading} type='people' />
           }} />
 
           <Route path='/planets' render={() => {
-            return <CardContainer cards={this.state.planets} isLoading={this.state.isLoading} />
+            return <CardContainer cards={this.state.planets} isLoading={this.state.isLoading} type='planets' />
           }} />
 
           <Route path='/vehicles' render={() => {
-            return <CardContainer cards={this.state.vehicles} isLoading={this.state.isLoading} />
+            return <CardContainer cards={this.state.vehicles} isLoading={this.state.isLoading} type='vehicles' />
           }} />
 
         </div>

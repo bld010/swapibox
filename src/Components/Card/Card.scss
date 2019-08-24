@@ -3,7 +3,7 @@ $name-color: goldenrod;
 $box-shadow: 0px 0px 8px 3px rgb(67, 165, 71);
 
 .Card {
-  height: 250px;
+  min-height: 280px;
   width: 250px;
   border: 1px solid $main-color;
   color: $main-color;
@@ -13,18 +13,29 @@ $box-shadow: 0px 0px 8px 3px rgb(67, 165, 71);
   padding: 20px;
   border-radius: 0 29px 0 29px;
   text-align: left;
+  font-family: 'Courier';
 
   & h4 {
     color: $name-color;
-    font-size: 22px;
+    font-size: 18px;
     text-transform: uppercase;
+    border-bottom: 1px solid $name-color;
+    margin-top:10px ;
+    width: 85%;
     
   } 
 
-  & p {
-    font-size: 18px;
+  & h5 {
+    font-size: 16px;
+    margin: 0;
+    color: $name-color;
     text-transform: uppercase;
-    font-weight: bold;
+  }
+
+  & p {
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-left: 20px;
   }
 
   & button {
@@ -34,6 +45,17 @@ $box-shadow: 0px 0px 8px 3px rgb(67, 165, 71);
     height: 30px;
     width: 30px;
     background: black;
-    cursor: pointer
+    cursor: pointer;
+    position: absolute;
+  }
+
+  & .residents {
+    text-transform: uppercase;
+  }
+
+  & .planets {
+    height: 460px;
   }
 }
+
+

@@ -2,7 +2,6 @@ import React from 'react';
 import './Header.scss';
 import PropTypes from 'prop-types';
 import TextCrawl from '../TextCrawl/TextCrawl'
-import FilterButton from '../FilterButton/FilterButton';
 import { NavLink } from 'react-router-dom';
 
 const Header = ({ movie, favoritesCount }) => {
@@ -22,7 +21,7 @@ const Header = ({ movie, favoritesCount }) => {
           vehicles
         </NavLink>
         <NavLink to="/favorites">
-          favorites | {favoritesCount} />
+          favorites | {favoritesCount}
         </NavLink>
       </nav>
     </header>

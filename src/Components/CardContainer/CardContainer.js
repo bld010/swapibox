@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import Card from '../Card/Card';
 import './CardContainer.scss'
 
-const CardContainer = ({ cards, isLoading }) => {
+const CardContainer = ({ cards, isLoading, type }) => {
   return(
     <section className="CardContainer">
       {cards !== null && cards.map(card => 
-        <Card key={card.name} {...card}/>
+        <Card key={card.name} type={type} {...card}/>
         
       )}
       {cards === null && <p>Loading ...</p>}
