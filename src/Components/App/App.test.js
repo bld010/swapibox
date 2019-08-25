@@ -9,6 +9,31 @@ import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
 
+describe('App', () => {
+  it('should match the snapshot', () => {
+    const wrapper = shallow(<App />);
+
+    expect(wrapper).toMatchSnapshot();
+  })
+
+  it('has a method to updateState -- passed to child components', () => {
+    const wrapper = shallow(<App />);
+    const initialState = wrapper.state();
+    const mockPeopleArray = [{name: 'Anakin'}, {name: 'Chewy'}]
+
+    wrapper.instance().updateAppState('people', mockPeopleArray)
+
+    const expectedState = wrapper.state();
+
+    expect(expectedState.people).not.toEqual(initialState.people)
+    expect(expectedState.people).toEqual(mockPeopleArray)
+  }
+  )
+  
+  //componentDidMount fires fetches
+
+})
+
 describe('Router', () => {
   it('should show People component for /people router', () => {
     const wrapper = mount(
