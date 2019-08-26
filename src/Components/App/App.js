@@ -25,6 +25,12 @@ class App extends Component {
     })
   }
 
+  addFavorite = (newFavoriteCard) => {
+    this.setState({
+      favorites: [...this.state.favorites, newFavoriteCard]
+    })
+  } 
+
   componentDidMount() {
     fetchMovie(this.updateAppState)
     fetchCards('https://swapi.co/api/people/', this.updateAppState, 'people')
@@ -43,15 +49,15 @@ class App extends Component {
           }} />
 
           <Route path='/people' render={() => {
-            return <CardContainer cards={this.state.people} isLoading={this.state.isLoading} type='people' />
+            return <CardContainer addFavorite={this.addFavorite} cards={this.state.people} isLoading={this.state.isLoading} type='people' />
           }} />
 
           <Route path='/planets' render={() => {
-            return <CardContainer cards={this.state.planets} isLoading={this.state.isLoading} type='planets' />
+            return <CardContainer addFavorite={this.addFavorite} cards={this.state.planets} isLoading={this.state.isLoading} type='planets' />
           }} />
 
           <Route path='/vehicles' render={() => {
-            return <CardContainer cards={this.state.vehicles} isLoading={this.state.isLoading} type='vehicles' />
+            return <CardContainer addFavorite={this.addFavorite} cards={this.state.vehicles} isLoading={this.state.isLoading} type='vehicles' />
           }} />
 
         </div>

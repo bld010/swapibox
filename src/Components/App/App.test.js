@@ -30,7 +30,23 @@ describe('App', () => {
   }
   )
   
-  //componentDidMount fires fetches
+    // it('should fire fetch calls when mounted', () => {
+      
+    //   // const wrapper = shallow(<App />);
+    //   // let mockFetchMovie = jest.fn()
+    //   // let mockFetchCards = jest.fn();
+
+    //   // wrapper.instance().componentDidMount = jest.fn()
+
+    //   // wrapper.instance().fetchCards = mockFetchCards;
+    //   // wrapper.instance().fetchMovie = mockFetchMovie;
+    //   // wrapper.instance().forceUpdate();
+
+    //   // console.log(wrapper.instance())
+
+    //   // expect(componentDidMount).toHaveBeenCalled();
+
+    // })
 
 })
 

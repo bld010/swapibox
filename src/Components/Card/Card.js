@@ -15,8 +15,26 @@ const Card = (props) => {
     residents, 
     climate, 
     type,
-    passengers
+    passengers,
+    addFavorite
    } = props
+
+
+   let getFavoriteInfo = () => {
+
+    if (type === 'people') {
+      return { name, species, homeworld, population, language, type}
+    }
+
+    if (type === 'vehicles') {
+      return { name, model, vehicle_class, passengers, type}
+    }
+
+    if (type === 'planets') {
+      return { name, population, terrain, climate, residents, type}
+    }
+
+  }
 
   let peopleCard = 
     <>
@@ -29,10 +47,11 @@ const Card = (props) => {
     </>;
 
   let residentsList = 
-      <p className='residents'>
+    <>
+      <p className='residents'></p>
       <span>{residents && residents.length > 0 && residents.join(', ')}</span>
       {residents && residents.length === 0 && <p>None</p>}
-      </p>;
+    </>
   
   let planetCard = 
     <>
@@ -58,7 +77,8 @@ const Card = (props) => {
 
   return(
     <article className={type + ' Card'}>
-      <button></button>
+      <button onClick={(props) => addFavorite(getFavoriteInfo())}></button>
+        
       <h4>{name}</h4>
       
       {type === 'people' && peopleCard}
@@ -84,4 +104,5 @@ Card.propTypes = {
   residents: PropTypes.array,
   climate:  PropTypes.string,
   passengers:  PropTypes.string,
+  addFavorite: PropTypes.func
 }
