@@ -77,7 +77,7 @@ const Card = (props) => {
 
   return(
     <article className={type + ' Card'}>
-      <button onClick={(props) => addFavorite(getFavoriteInfo())}></button>
+      <button onClick={() => addFavorite(getFavoriteInfo())}></button>
         
       <h4>{name}</h4>
       

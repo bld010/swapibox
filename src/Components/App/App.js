@@ -26,9 +26,14 @@ class App extends Component {
   }
 
   addFavorite = (newFavoriteCard) => {
-    this.setState({
-      favorites: [...this.state.favorites, newFavoriteCard]
-    })
+    
+    if (!this.state.favorites.find(favorite => favorite.name === newFavoriteCard.name)) {
+      
+      this.setState({
+        favorites: [...this.state.favorites, newFavoriteCard]
+      })
+      console.log(this.state.favorites)
+    }
   } 
 
   componentDidMount() {
@@ -58,6 +63,10 @@ class App extends Component {
 
           <Route path='/vehicles' render={() => {
             return <CardContainer addFavorite={this.addFavorite} cards={this.state.vehicles} isLoading={this.state.isLoading} type='vehicles' />
+          }} />
+
+          <Route path='/favorites' render={() => {
+            return <CardContainer addFavorite={this.addFavorite} cards={this.state.favorites} isLoading={this.state.isLoading} />
           }} />
 
         </div>
