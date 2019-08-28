@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CardContainer should match the wrapper with data passed through 1`] = `
+<section
+  className="people CardContainer"
+>
+  <Card
+    favorites={
+      Array [
+        Object {
+          "homeworld": "Tatooine",
+          "language": "Galactic Basic",
+          "name": "Luke Skywalker",
+          "population": "200000",
+          "species": "Human",
+        },
+      ]
+    }
+    handleFavorite={[MockFunction]}
+    homeworld="Tatooine"
+    key="Luke Skywalker"
+    language="Galactic Basic"
+    name="Luke Skywalker"
+    population="200000"
+    species="Human"
+    type="people"
+  />
+  <Card
+    favorites={
+      Array [
+        Object {
+          "homeworld": "Tatooine",
+          "language": "Galactic Basic",
+          "name": "Luke Skywalker",
+          "population": "200000",
+          "species": "Human",
+        },
+      ]
+    }
+    handleFavorite={[MockFunction]}
+    homeworld="Tatooine"
+    key="C-3PO"
+    language="n/a"
+    name="C-3PO"
+    population="200000"
+    species="Droid"
+    type="people"
+  />
+  <Card
+    favorites={
+      Array [
+        Object {
+          "homeworld": "Tatooine",
+          "language": "Galactic Basic",
+          "name": "Luke Skywalker",
+          "population": "200000",
+          "species": "Human",
+        },
+      ]
+    }
+    handleFavorite={[MockFunction]}
+    homeworld="Naboo"
+    key="R2-D2"
+    language="n/a"
+    name="R2-D2"
+    population="4500000000"
+    species="Droid"
+    type="people"
+  />
+</section>
+`;

@@ -4,7 +4,6 @@ import Card from '../Card/Card';
 import './CardContainer.scss'
 
 const CardContainer = ({ cards, type, handleFavorite, favorites, error }) => {
-
   return(
     <section className={type + " CardContainer"}>
       {cards !== null && cards.map(card => 

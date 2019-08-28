@@ -4,8 +4,6 @@ import './TextCrawl.scss'
 
 const TextCrawl = (props) => {
 
-
-
   return(
     <section className="TextCrawl">
       <div className="crawl">

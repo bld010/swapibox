@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header should match the snapshot 1`] = `
+<header
+  className="Header"
+>
+  <h1>
+    SWAPIbox
+  </h1>
+  <TextCrawl
+    movie={
+      Object {
+        "title": "StarWars",
+      }
+    }
+  />
+  <nav>
+    <NavLink
+      to="/people"
+    >
+      people
+    </NavLink>
+    <NavLink
+      to="/planets"
+    >
+      planets
+    </NavLink>
+    <NavLink
+      to="/vehicles"
+    >
+      vehicles
+    </NavLink>
+    <NavLink
+      to="/favorites"
+    >
+      favorites | 
+      2
+    </NavLink>
+  </nav>
+</header>
+`;

@@ -140,6 +140,66 @@ describe('Router', () => {
 
   });
 
+  it('should show prompt for /favorites router if no favorites', () => {
+    
+    
+    const wrapper = mount(
+      <MemoryRouter initialEntries={['/favorites']}>
+        <App />
+      </MemoryRouter>
+    )
+    
+    const expected = wrapper.find('p').props().children
+    
+    expect(expected).toEqual('No favorites found.  Click on the circle next to the name of the person, vehicle, or planet you\'d like to favorite.')
+
+  })
+
+  it('should show /favorites router if there are favorites', () => {
+    
+      const wrapper = mount(
+      <MemoryRouter initialEntries={['/favorites']}>
+        <App />
+      </MemoryRouter>
+    )
+    
+    let mockFavoriteObject1 = {
+      name: 'Han', 
+      species:'Human', 
+      homeworld:'Hoth', 
+      population: '9', 
+      language: 'German', 
+      type: 'people'
+    }
+    let mockFavoriteObject2 = {
+      name: 'Solo', 
+      species:'Human', 
+      homeworld:'Hoth', 
+      population: '9', 
+      language: 'German', 
+      type: 'people'
+    }
+
+    wrapper.find(App).setState({
+      planets: null,
+      people: null,
+      movie: null,
+      vehicles: null,
+      favorites: [mockFavoriteObject1, mockFavoriteObject2],
+      isLoading: true,
+      peopleFetchError: null,
+      vehiclesFetchError: null,
+      planetsFetchError: null,
+      movieFetchError: null,
+    })
+    wrapper.update();
+
+    const cardContainer = wrapper.find(CardContainer)
+    
+    expect(cardContainer).toHaveLength(1)
+    
+  })
+
 })
 
 })

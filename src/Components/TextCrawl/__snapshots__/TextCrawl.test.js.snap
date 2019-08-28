@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextCrawl should match the snapshot 1`] = `
+<section
+  className="TextCrawl"
+>
+  <div
+    className="crawl"
+  >
+    <p>
+      A long time ago in a galaxy far far away
+    </p>
+    <p>
+      Star Wars
+    </p>
+    <p>
+      Yesteryear
+    </p>
+  </div>
+</section>
+`;
