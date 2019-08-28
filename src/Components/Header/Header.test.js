@@ -10,8 +10,6 @@ configure({ adapter: new Adapter() });
 
 
 
-
-
 describe('Header', () => {
   it('should match the snapshot', () => {
 

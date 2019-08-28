@@ -122,6 +122,12 @@ class App extends Component {
             }
           }} />
 
+          <Route render={() => {
+            return <section className='CardContainer'>
+              <h4>Sorry, the url you entered is incorrect. Try clicking one of the links above.</h4>
+            </section>
+          }} />
+
         </div>
     )
     }
