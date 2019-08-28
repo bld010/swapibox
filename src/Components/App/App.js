@@ -15,10 +15,19 @@ class App extends Component {
       movie: null,
       vehicles: null,
       favorites: [],
-      isLoading: true
+      isLoading: true,
+      peopleFetchError: null,
+      vehiclesFetchError: null,
+      planetsFetchError: null,
+      movieFetchError: null,
     }
     this.fetchMovie = fetchMovie;
     this.fetchCards = fetchCards;
+  }
+
+  handleFetchError = (errorType, errorMessage) => {
+
+    this.updateAppState(errorType, errorMessage)
   }
 
   updateAppState = (stateProperty, stateValue) => {
@@ -49,17 +58,21 @@ class App extends Component {
   }
 
   componentDidMount() {
-    setTimeout(() => this.fetchMovie(this.updateAppState), 4000)
-    this.fetchCards('https://swapi.co/api/people/', this.updateAppState, 'people')
-    this.fetchCards('https://swapi.co/api/planets/',  this.updateAppState, 'planets')
-    this.fetchCards('https://swapi.co/api/vehicles/', this.updateAppState, 'vehicles')
+    setTimeout(() => this.fetchMovie(this.updateAppState, this.handleFetchError), 4000)
+    this.fetchCards('https://swapi.co/api/people/', this.updateAppState, 'people', this.handleFetchError)
+    this.fetchCards('https://swapi.co/api/planets/',  this.updateAppState, 'planets', this.handleFetchError)
+    this.fetchCards('https://swapi.co/api/vehicles/', this.updateAppState, 'vehicles', this.handleFetchError)
   }
   
 
   render() {
     return (
         <div className='App'>
-          <Header favoritesCount={this.state.favorites.length} movie={this.state.movie} />
+          <Header 
+            favoritesCount={this.state.favorites.length} 
+            movie={this.state.movie}  
+            error={this.state.movieFetchError}
+            />
 
           <Route exact path="/" render={() => {
             return (<section className='CardContainer'>
@@ -73,6 +86,7 @@ class App extends Component {
               favorites={this.state.favorites} 
               handleFavorite={this.handleFavorite} 
               cards={this.state.people} 
+              error={this.state.peopleFetchError}
               type='people' />
           }} />
 
@@ -81,6 +95,7 @@ class App extends Component {
               favorites={this.state.favorites} 
               handleFavorite={this.handleFavorite} 
               cards={this.state.planets} 
+              error={this.state.planetsFetchError}
               type='planets' />
           }} />
 
@@ -89,6 +104,7 @@ class App extends Component {
             favorites={this.state.favorites} 
             handleFavorite={this.handleFavorite} 
             cards={this.state.vehicles} 
+            error={this.state.vehiclesFetchError}
             type='vehicles' />
           }} />
 

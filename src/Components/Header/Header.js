@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 import TextCrawl from '../TextCrawl/TextCrawl'
 import { NavLink } from 'react-router-dom';
 
-const Header = ({ movie, favoritesCount }) => {
+const Header = ({ movie, favoritesCount, error }) => {
 
   return(
     <header className="Header">
       <h1>SWAPIbox</h1>
-      
-        {movie !== null && <TextCrawl movie={movie}/>}
-        {movie === null && <div className="placeholder">
+        {error !== null && <p>{error}</p>}
+        {movie !== null && error === null && <TextCrawl movie={movie}/>}
+        {movie === null && error === null && <div className="placeholder">
           <h4>A long time ago in a galaxy far, far away ...</h4>
         </div>}
       <nav>

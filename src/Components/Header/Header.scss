@@ -12,7 +12,8 @@ $title-color: goldenrod;
 
 
   & .placeholder {
-    min-width: 400px;
+    width: 300px;
+    margin-top: 80px;
     min-height: 200px;
 
     & h4 {
@@ -38,7 +39,7 @@ $title-color: goldenrod;
 
   & h1 {
     margin: 100px 0px 10px 0px;
-    padding: 10px;
+    padding: 100px;
     font-size: 50px;
     color: $title-color;
   }

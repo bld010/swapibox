@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-export const fetchCards = (url, updateAppState, dataType) => {
+export const fetchCards = (url, updateAppState, dataType, handleFetchError) => {
 
   let objToReturn = null
 
@@ -17,10 +17,10 @@ export const fetchCards = (url, updateAppState, dataType) => {
             species: person.species[0]
           };
         })
+        .catch(error => handleFetchError('cardFetchError', 'There was an error gathering Homeworld and Population info.'))
     });
     return Promise.all(homeworldPromises)
         .then(data => (objToReturn = data))
-        // .then(data => console.log(objToReturn))
         .then(data => fetchSpeciesAndLang(objToReturn));
   }
 
@@ -31,7 +31,8 @@ export const fetchCards = (url, updateAppState, dataType) => {
           .then(resp => {
             person.species = resp.name;
             person.language = resp.language;
-          });
+          })
+          .catch(error => handleFetchError('cardFetchError', 'There was an error gathering Species and Language info.'))
       });
       return Promise.all(speciesPromises).then(resp =>{
         updateAppState('people', objToReturn)
@@ -70,7 +71,7 @@ export const fetchCards = (url, updateAppState, dataType) => {
           return fetch(resident)
             .then(resp => resp.json())
             .then(resp => resp.name)
-            .catch(error => console.log('error Fetching Residents'))
+            .catch(error => handleFetchError('cardFetchError', 'There was an error gathering resident data.'))
         });
         Promise.all(residentsPromises)
           .then(resp => {
@@ -102,11 +103,14 @@ export const fetchCards = (url, updateAppState, dataType) => {
     }
     }
   
+  const getErrorName = () => {
+    return dataType + 'FetchError'
+  }
 
   fetch(url)
     .then(resp => resp.json())
     .then(data => callSecondaryFetches(data.results))
-    .catch(error => console.log(error))
+    .catch(error => handleFetchError(getErrorName(), 'There was an error gathering the requested ' + dataType + ' info.'))
 }
 
 
@@ -120,7 +124,7 @@ export const fetchCards = (url, updateAppState, dataType) => {
 
 
 
-export const fetchMovie = (updateAppState) => { 
+export const fetchMovie = (updateAppState, handleFetchError) => { 
 
   const getRandomMovieID = () => {
     return Math.floor(Math.random() * Math.floor(7) + 1);
@@ -147,16 +151,18 @@ export const fetchMovie = (updateAppState) => {
       return data
     })
     .then(data => cleanMovie())
-    .catch(error => console.log(error))
+    .catch(error => handleFetchError('movieFetchError', 'There was an error fetching movie info.'))
 
 }
 
 
 fetchMovie.propTypes = {
   updateAppState: PropTypes.func,
+  handleFetchError: PropTypes.func
 }
 
 fetchCards.propTypes = {
-  updateAppState: PropTypes.func
+  updateAppState: PropTypes.func,
+  handleFetchError: PropTypes.func
 }
 
