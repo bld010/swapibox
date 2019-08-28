@@ -9,6 +9,19 @@ $title-color: goldenrod;
   flex-direction: row;
   justify-content: space-around;
 
+  & .active {
+    color: $title-color;
+    text-decoration: none;
+  }
+
+  & a {
+    text-decoration: none;
+    color: $main-color;
+    font-family: 'Courier';
+    font-size: 30px;
+    text-align: left;
+    font-weight: 300;
+  }
 
   & h1 {
     margin: 0px 0px 10px 0px;
@@ -25,6 +38,7 @@ $title-color: goldenrod;
     background: black;
     box-shadow: 0px 0px 8px 3px rgb(67, 165, 71);
     border-radius: 5px;
+    
 
     & button {
       margin: 5px 25px;
@@ -42,9 +56,6 @@ $title-color: goldenrod;
         
       }
       
-      & .active {
-        color: red;
-      }
     }
   }
 }

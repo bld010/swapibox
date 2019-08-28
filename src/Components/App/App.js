@@ -17,6 +17,8 @@ class App extends Component {
       favorites: [],
       isLoading: true
     }
+    this.fetchMovie = fetchMovie;
+    this.fetchCards = fetchCards;
   }
 
   updateAppState = (stateProperty, stateValue) => {
@@ -25,22 +27,32 @@ class App extends Component {
     })
   }
 
+  handleFavorite = (favoritedCard) => {
+    if (!this.state.favorites.find(favorite => favorite.name === favoritedCard.name)) {
+      this.addFavorite(favoritedCard)
+    } else {
+      this.removeFavorite(favoritedCard)
+    }
+  }
+
   addFavorite = (newFavoriteCard) => {
-    
-    if (!this.state.favorites.find(favorite => favorite.name === newFavoriteCard.name)) {
-      
       this.setState({
         favorites: [...this.state.favorites, newFavoriteCard]
       })
-      console.log(this.state.favorites)
-    }
   } 
 
+  removeFavorite = (cardToRemove) => {
+    this.setState({
+      favorites: this.state.favorites.filter(favorite => favorite.name !== cardToRemove.name)
+    })
+    console.log(this.state.favorites)
+  }
+
   componentDidMount() {
-    fetchMovie(this.updateAppState)
-    fetchCards('https://swapi.co/api/people/', this.updateAppState, 'people')
-    fetchCards('https://swapi.co/api/planets/',  this.updateAppState, 'planets')
-    fetchCards('https://swapi.co/api/vehicles/', this.updateAppState, 'vehicles')
+    this.fetchMovie(this.updateAppState)
+    this.fetchCards('https://swapi.co/api/people/', this.updateAppState, 'people')
+    this.fetchCards('https://swapi.co/api/planets/',  this.updateAppState, 'planets')
+    this.fetchCards('https://swapi.co/api/vehicles/', this.updateAppState, 'vehicles')
   }
   
 
@@ -50,23 +62,42 @@ class App extends Component {
           <Header favoritesCount={this.state.favorites.length} movie={this.state.movie} />
 
           <Route exact path="/" render={() => {
-            return <h2>Please select a link above to display stuff.</h2>
+            return <h2>Please select a link above to display people, planets, vehicles, or favorites.</h2>
           }} />
 
           <Route path='/people' render={() => {
-            return <CardContainer addFavorite={this.addFavorite} cards={this.state.people} isLoading={this.state.isLoading} type='people' />
+            return <CardContainer 
+              favorites={this.state.favorites} 
+              handleFavorite={this.handleFavorite} 
+              cards={this.state.people} 
+              type='people' />
           }} />
 
           <Route path='/planets' render={() => {
-            return <CardContainer addFavorite={this.addFavorite} cards={this.state.planets} isLoading={this.state.isLoading} type='planets' />
+            return <CardContainer 
+              favorites={this.state.favorites} 
+              handleFavorite={this.handleFavorite} 
+              cards={this.state.planets} 
+              type='planets' />
           }} />
 
           <Route path='/vehicles' render={() => {
-            return <CardContainer addFavorite={this.addFavorite} cards={this.state.vehicles} isLoading={this.state.isLoading} type='vehicles' />
+            return <CardContainer 
+            favorites={this.state.favorites} 
+            handleFavorite={this.handleFavorite} 
+            cards={this.state.vehicles} 
+            type='vehicles' />
           }} />
 
           <Route path='/favorites' render={() => {
-            return <CardContainer addFavorite={this.addFavorite} cards={this.state.favorites} isLoading={this.state.isLoading} />
+            if (this.state.favorites.length === 0) {
+              return <p>Please favorite some items by clicking the circle next to the name</p>
+            } else {
+              return <CardContainer 
+                favorites={this.state.favorites} 
+                handleFavorite={this.handleFavorite} 
+                cards={this.state.favorites} />
+            }
           }} />
 
         </div>

@@ -25,5 +25,9 @@ exports[`App should match the snapshot 1`] = `
     path="/vehicles"
     render={[Function]}
   />
+  <Route
+    path="/favorites"
+    render={[Function]}
+  />
 </div>
 `;

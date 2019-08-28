@@ -16,8 +16,10 @@ const Card = (props) => {
     climate, 
     type,
     passengers,
-    addFavorite
+    handleFavorite,
+    favorites
    } = props
+
 
 
    let getFavoriteInfo = () => {
@@ -75,9 +77,17 @@ const Card = (props) => {
     <p>{passengers}</p>
     </>;
 
+
+  
+
+  let handleFavoriteButton = (favoritedCard) => {
+    handleFavorite(favoritedCard);
+    // toggleCardClass()
+  }
+
   return(
     <article className={type + ' Card'}>
-      <button onClick={() => addFavorite(getFavoriteInfo())}></button>
+      <button onClick={() => handleFavoriteButton(getFavoriteInfo())}></button>
         
       <h4>{name}</h4>
       
@@ -104,5 +114,6 @@ Card.propTypes = {
   residents: PropTypes.array,
   climate:  PropTypes.string,
   passengers:  PropTypes.string,
-  addFavorite: PropTypes.func
+  handleFavorite: PropTypes.func,
+  favorites: PropTypes.array
 }
