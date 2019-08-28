@@ -3,11 +3,13 @@ import App from './App';
 import { shallow, mount } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 import CardContainer from '../CardContainer/CardContainer';
+import { fetchMovie, fetchCards } from '../Fetch/Fetch'
 
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
+
 
 describe('App', () => {
   it('should match the snapshot', () => {
@@ -30,24 +32,64 @@ describe('App', () => {
   }
   )
   
-    // it('should fire fetch calls when mounted', () => {
-      
-    //   // const wrapper = shallow(<App />);
-    //   // let mockFetchMovie = jest.fn()
-    //   // let mockFetchCards = jest.fn();
+  it('should update state with fetch errors', () => {
+    const wrapper = shallow(<App />)
 
-    //   // wrapper.instance().componentDidMount = jest.fn()
+    const initialError = wrapper.state().peopleFetchError;
+    wrapper.instance().handleFetchError('peopleFetchError', 'Error with people fetch')
+    const expected = wrapper.state().peopleFetchError;
+    
+    expect(initialError).toEqual(null);
+    expect(expected).toEqual('Error with people fetch')
+  })
 
-    //   // wrapper.instance().fetchCards = mockFetchCards;
-    //   // wrapper.instance().fetchMovie = mockFetchMovie;
-    //   // wrapper.instance().forceUpdate();
+  it('should add favoriteCards to state', () => {
+    const wrapper = shallow(<App />);
+    wrapper.setState({favorites: [{name: 'Anakin'}]})
+    const expected = [{name: 'Anakin'}, {name: 'Chewy'}];
+    wrapper.instance().addFavorite({name: 'Chewy'})
+    expect(wrapper.state().favorites).toEqual(expected);
+  })
 
-    //   // console.log(wrapper.instance())
+  it('should remove unfavoritedCards from state', () => {
 
-    //   // expect(componentDidMount).toHaveBeenCalled();
+    const wrapper = shallow(<App />);
+    wrapper.setState({favorites: [{name: 'Anakin'}, {name: 'Chewy'}]});
+    wrapper.instance().removeFavorite({name: 'Chewy'});
+    const expected = [{name: 'Anakin'}];
+    expect(wrapper.state().favorites).toEqual(expected);
 
-    // })
+  })
 
+  describe('handleFavorite' , () => {
+    it('should fire removeFavorite when new favorite is passed as argument', () => {
+      const wrapper = shallow(<App />);
+      const mockAddFavorite = jest.fn();
+      wrapper.instance().addFavorite = mockAddFavorite;
+      wrapper.setState({favorites: [{name: 'Anakin'}, {name: 'Chewy'}]});
+      wrapper.instance().handleFavorite({name: 'Han'});
+      expect(mockAddFavorite).toHaveBeenCalled();
+    })
+
+    it('should fire removeFavorite when current favorite is passed as argument', () => {
+      const wrapper = shallow(<App />);
+      const mockRemoveFavorite = jest.fn();
+      wrapper.instance().removeFavorite = mockRemoveFavorite;
+      wrapper.setState({favorites: [{name: 'Anakin'}, {name: 'Chewy'}]});
+      wrapper.instance().handleFavorite({name: 'Anakin'});
+      expect(mockRemoveFavorite).toHaveBeenCalled();
+    })
+
+  })
+
+
+  describe('componentDidMount', () => {
+    it('should fire 4 fetch calls', async () => {
+      jest.spyOn(window, "fetch")
+      const wrapper = await shallow(<App />)
+      await wrapper.update()
+      expect(window.fetch).toHaveBeenCalledTimes(4);
+    }) 
 })
 
 describe('Router', () => {
@@ -62,6 +104,7 @@ describe('Router', () => {
     
     expect(cardContainer).toHaveLength(1)
   });
+
   it('should show Planets component for /planets router', () => {
     const wrapper = mount(
       <MemoryRouter initialEntries={['/planets']}>
@@ -92,12 +135,13 @@ describe('Router', () => {
       </MemoryRouter>
     )
 
-
     const expected = wrapper.find('h2').props().children
     
-    expect(expected).toEqual('Please select a link above to display stuff.')
+    expect(expected).toEqual('Please select a link above to display people, planets, vehicles, or favorites.')
 
-    //This test is throwing async errors b/c of fetch calls
   });
 
 })
+
+})
+

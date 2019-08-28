@@ -5,6 +5,7 @@ exports[`App should match the snapshot 1`] = `
   className="App"
 >
   <Header
+    error={null}
     favoritesCount={0}
     movie={null}
   />

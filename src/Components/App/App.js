@@ -58,7 +58,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    setTimeout(() => this.fetchMovie(this.updateAppState, this.handleFetchError), 4000)
+    this.fetchMovie(this.updateAppState, this.handleFetchError);
     this.fetchCards('https://swapi.co/api/people/', this.updateAppState, 'people', this.handleFetchError)
     this.fetchCards('https://swapi.co/api/planets/',  this.updateAppState, 'planets', this.handleFetchError)
     this.fetchCards('https://swapi.co/api/vehicles/', this.updateAppState, 'vehicles', this.handleFetchError)
