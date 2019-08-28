@@ -5,7 +5,6 @@ import CardContainer from '../CardContainer/CardContainer';
 import { fetchMovie, fetchCards } from '../Fetch/Fetch';
 import { Route } from 'react-router-dom';
 
-
 class App extends Component {
   constructor() {
     super(); 
@@ -20,6 +19,7 @@ class App extends Component {
       vehiclesFetchError: null,
       planetsFetchError: null,
       movieFetchError: null,
+      cardFetchError: null
     }
     this.fetchMovie = fetchMovie;
     this.fetchCards = fetchCards;
@@ -122,11 +122,11 @@ class App extends Component {
             }
           }} />
 
-          <Route render={() => {
+          {/* <Route render={() => {
             return <section className='CardContainer'>
               <h4>Sorry, the url you entered is incorrect. Try clicking one of the links above.</h4>
             </section>
-          }} />
+          }} /> */}
 
         </div>
     )

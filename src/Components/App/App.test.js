@@ -200,16 +200,16 @@ describe('Router', () => {
     
   })
 
-  it('should show a prompt for an invalid path', () => {
-    const wrapper = mount(
-      <MemoryRouter initialEntries={['/oiejrowiejr']}>
-        <App />
-      </MemoryRouter>
-    )
-    const expected = wrapper.find('h4').at(1).props().children;
+  // it('should show a prompt for an invalid path', () => {
+  //   const wrapper = mount(
+  //     <MemoryRouter initialEntries={['/oiejrowiejr']}>
+  //       <App />
+  //     </MemoryRouter>
+  //   )
+  //   const expected = wrapper.find('h4').at(1).props().children;
 
-    expect(expected).toEqual('Sorry, the url you entered is incorrect. Try clicking one of the links above.')
-  })
+  //   expect(expected).toEqual('Sorry, the url you entered is incorrect. Try clicking one of the links above.')
+  // })
 
 })
 

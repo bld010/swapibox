@@ -1,127 +1,136 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
-export const fetchCards = (url, updateAppState, dataType, handleFetchError) => {
 
-  let objToReturn = null
-
-  const fetchHomeworldAndPopulation = (peopleArray) => {
-    let homeworldPromises = peopleArray.map(person => {
-      return fetch(person.homeworld)
-        .then(resp => resp.json())
-        .then(data => {
-          let { name, population } = data;
-          return {
-            name: person.name,
-            homeworld: name,
-            population,
-            species: person.species[0]
-          };
-        })
-        .catch(error => handleFetchError('cardFetchError', 'There was an error gathering Homeworld and Population info.'))
-    });
-    return Promise.all(homeworldPromises)
-        .then(data => (objToReturn = data))
-        .then(data => fetchSpeciesAndLang(objToReturn));
-  }
-
-  const fetchSpeciesAndLang = (peopleArray) => {
-      let speciesPromises = objToReturn.map(person => {
-        return fetch(person.species)
-          .then(resp => resp.json())
-          .then(resp => {
-            person.species = resp.name;
-            person.language = resp.language;
-          })
-          .catch(error => handleFetchError('cardFetchError', 'There was an error gathering Species and Language info.'))
-      });
-      return Promise.all(speciesPromises).then(resp =>{
-        updateAppState('people', objToReturn)
-        updateAppState('isLoading', false)
-      })
-        
-    }
-
-  const cleanPlanets = (planets) => {
-
-    let cleanedPlanets = planets.map(planet => {
-
-      const {
-        name,
-        terrain,
-        population,
-        climate,
-        residents
-      } = planet;
-      return {
-        name,
-        terrain,
-        population,
-        climate,
-        residents
-      }
-    })
-    updateAppState('planets', cleanedPlanets);
-    updateAppState('isLoading', false)
-  }
-
-  const fetchResidents = (planetsArray) => {
-    objToReturn= planetsArray;
-      objToReturn.forEach((planet) => {
-        let residentsPromises = planet.residents.map(resident => {
-          return fetch(resident)
-            .then(resp => resp.json())
-            .then(resp => resp.name)
-            .catch(error => handleFetchError('cardFetchError', 'There was an error gathering resident data.'))
+export const fetchSpeciesAndLang = (peopleArray, updateAppState, handleFetchError) => {
+  let speciesPromises = peopleArray.map(person => {
+    return fetch(person.species)
+      .then(resp => resp.json())
+      .then(resp => {
+        person.species = resp.name;
+        person.language = resp.language;
+        return ({
+          name: person.name,
+          homeworld: person.homeworld,
+          species: person.species,
+          language: person.language,
+          population: person.population
         });
-        Promise.all(residentsPromises)
-          .then(resp => {
-            planet.residents = resp;
-            cleanPlanets(objToReturn)
-          })
-    })
-  }
-
-  const cleanVehicles = (responseData) => {
-    const cleanVehicles = responseData.map(vehicle => {
-      const { name, model, vehicle_class, passengers } = vehicle
-
-      return { name, model, vehicle_class, passengers }
-    })
+      })
+      .catch(error => handleFetchError('cardFetchError', 'There was an error gathering Species and Language info.'))
+  });
+  return Promise.all(speciesPromises)
+    .then(people => updateAppState('people', people))
     
-    updateAppState('vehicles', cleanVehicles )
-  }
-    
-  const callSecondaryFetches = (responseData) => {
-    if (dataType === 'people') {
-      fetchHomeworldAndPopulation(responseData)
-    }
-    if (dataType === 'planets') {
-      fetchResidents(responseData)
-    }
-    if (dataType === 'vehicles') {
-      cleanVehicles(responseData)
-    }
-    }
-  
-  const getErrorName = () => {
-    return dataType + 'FetchError'
-  }
-
-  fetch(url)
-    .then(resp => resp.json())
-    .then(data => callSecondaryFetches(data.results))
-    .catch(error => handleFetchError(getErrorName(), 'There was an error gathering the requested ' + dataType + ' info.'))
 }
 
+export const fetchHomeworldAndPopulation = (peopleArray, updateAppState, handleFetchError) => {
+  console.log(peopleArray)
+  let homeworldPromises = peopleArray.map(person => {
+    return fetch(person.homeworld)
+      .then(resp => resp.json())
+      .then(homeworldData => {
+        console.log(homeworldData)
+        person.homeworld = homeworldData.name;
+        person.population = homeworldData.population;      
+      })
+      .catch(error => handleFetchError('cardFetchError', 'There was an error gathering Homeworld and Population info.'))
+    })
+  
+    return Promise.all(homeworldPromises)
+    .then(resp => fetchSpeciesAndLang(peopleArray, updateAppState, handleFetchError))
+}
 
+export const cleanPlanets = (planets, updateAppState) => {
 
+  let cleanedPlanets = planets.map(planet => {
 
+    const {
+      name,
+      terrain,
+      population,
+      climate,
+      residents
+    } = planet;
 
+    return {
+      name,
+      terrain,
+      population,
+      climate,
+      residents
+    }
 
+  })
+  
+  updateAppState('planets', cleanedPlanets);
+}
 
+export const cleanVehicles = (residentsArray, updateAppState) => {
+  const cleanedVehicles = residentsArray.map(vehicle => {
+    const { name, model, vehicle_class, passengers } = vehicle
+    return { name, model, vehicle_class, passengers }
+  })
+  updateAppState('vehicles', cleanedVehicles )
+}
 
+export const getErrorName = (dataType) => {
+  return dataType + 'FetchError'
+}
 
+export const handleFirstResponse = (responseData, dataType, updateAppState, handleFetchError) => {
+  if( dataType === 'vehicles') {
+    cleanVehicles(responseData, updateAppState)
+  } else {
+    callSecondaryFetches(responseData, updateAppState, handleFetchError, dataType)
+  }
+}
 
+export const fetchResidents = (planetsArray, updateAppState, handleFetchError) => {
+  planetsArray.forEach((planet) => {
+    let residentsPromises = planet.residents.map(resident => {
+      return fetch(resident)
+        .then(resp => resp.json())
+        .then(residentObj => residentObj.name)
+        .catch(error => handleFetchError('cardFetchError', 'There was an error gathering resident data.'))
+    });
+    Promise.all(residentsPromises)
+      .then(resolvedResidentsNames => {
+        planet.residents = resolvedResidentsNames;
+        cleanPlanets(planetsArray, updateAppState)
+      })
+})
+}
+
+export const callSecondaryFetches = (responseData, updateAppState, handleFetchError, dataType) => {
+  if (dataType === 'planets') {
+    fetchResidents(responseData, updateAppState, handleFetchError)
+  }
+  if ( dataType === 'people') {
+    fetchHomeworldAndPopulation(responseData, updateAppState, handleFetchError)
+  }
+}
+
+export const fetchCards = (url, updateAppState, dataType, handleFetchError) => {
+  fetch(url)
+    .then(resp => resp.json())
+    .then(data => {
+      handleFirstResponse(data.results, dataType, updateAppState, handleFetchError)
+      return data} 
+      )
+    .catch(error => console.log(error))
+    .catch(error => handleFetchError(getErrorName(dataType), 'There was an error gathering the requested ' + dataType + ' info.'))
+}
+
+export const cleanMovie = (movie, updateAppState) => {
+  let { title, opening_crawl, release_date } = movie;
+  let cleanedMovie = {
+    title,
+    opening_crawl,
+    release_date
+  }
+
+  updateAppState('movie', cleanedMovie)
+}
 
 
 export const fetchMovie = (updateAppState, handleFetchError) => { 
@@ -133,36 +142,27 @@ export const fetchMovie = (updateAppState, handleFetchError) => {
   let movieURL = 'https://swapi.co/api/films/' + getRandomMovieID();
 
 
-  const cleanMovie = () => {
-    let { title, opening_crawl, release_date } = movie;
-    let cleanedMovie = {
-      title,
-      opening_crawl,
-      release_date
-    }
-
-    updateAppState('movie', cleanedMovie)
-  }
-
   fetch(movieURL)
     .then(resp => resp.json())
     .then(data => {
       movie = data
       return data
     })
-    .then(data => cleanMovie())
+    .then(data => cleanMovie(movie, updateAppState))
     .catch(error => handleFetchError('movieFetchError', 'There was an error fetching movie info.'))
 
 }
 
 
-fetchMovie.propTypes = {
-  updateAppState: PropTypes.func,
-  handleFetchError: PropTypes.func
-}
+// fetchMovie.propTypes = {
+//   updateAppState: PropTypes.func,
+//   handleFetchError: PropTypes.func
+// }
 
-fetchCards.propTypes = {
-  updateAppState: PropTypes.func,
-  handleFetchError: PropTypes.func
-}
+// fetchCards.propTypes = {
+//   updateAppState: PropTypes.func,
+//   handleFetchError: PropTypes.func,
+//   url: PropTypes.string,
+//   dataType: PropTypes.string
+// }
 
