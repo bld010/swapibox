@@ -1,0 +1,220 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card snapshots should match the people snapshot if a favorited person card 1`] = `
+<article
+  className="people Card"
+>
+  <button
+    className="favorite"
+    onClick={[Function]}
+  />
+  <h4>
+    Han Solo
+  </h4>
+  <h5>
+    | Species: 
+  </h5>
+  <p>
+    Human
+  </p>
+  <h5>
+    | Home: 
+  </h5>
+  <p>
+    Tatooine
+     (Pop. 
+    3
+    )
+  </p>
+  <h5>
+    | Language: 
+  </h5>
+  <p>
+    Galactic Basic
+  </p>
+</article>
+`;
+
+exports[`Card snapshots should match the people snapshot if not favorited person card 1`] = `
+<article
+  className="people Card"
+>
+  <button
+    className=""
+    onClick={[Function]}
+  />
+  <h4>
+    Anakin Skywalker
+  </h4>
+  <h5>
+    | Species: 
+  </h5>
+  <p>
+    Human
+  </p>
+  <h5>
+    | Home: 
+  </h5>
+  <p>
+    Tatooine
+     (Pop. 
+    3
+    )
+  </p>
+  <h5>
+    | Language: 
+  </h5>
+  <p>
+    Galactic Basic
+  </p>
+</article>
+`;
+
+exports[`Card snapshots should match the planets snapshot if favorited planet card 1`] = `
+<article
+  className="planets Card"
+>
+  <button
+    className="favorite"
+    onClick={[Function]}
+  />
+  <h4>
+    Hoth
+  </h4>
+  <h5>
+    | Terrain: 
+  </h5>
+  <p>
+    Scary
+  </p>
+  <h5>
+    | Population: 
+  </h5>
+  <p>
+    ?
+  </p>
+  <h5>
+    | Climate: 
+  </h5>
+  <p>
+    Cold, probably
+  </p>
+  <h5>
+    | Residents: 
+  </h5>
+  <p
+    className="residents"
+  />
+  <span />
+  <p>
+    None
+  </p>
+</article>
+`;
+
+exports[`Card snapshots should match the planets snapshot if not favorited planet card 1`] = `
+<article
+  className="planets Card"
+>
+  <button
+    className=""
+    onClick={[Function]}
+  />
+  <h4>
+    Naboo
+  </h4>
+  <h5>
+    | Terrain: 
+  </h5>
+  <p>
+    Scary
+  </p>
+  <h5>
+    | Population: 
+  </h5>
+  <p>
+    ?
+  </p>
+  <h5>
+    | Climate: 
+  </h5>
+  <p>
+    Cold, probably
+  </p>
+  <h5>
+    | Residents: 
+  </h5>
+  <p
+    className="residents"
+  />
+  <span>
+    Joe, Bob, Sarah
+  </span>
+</article>
+`;
+
+exports[`Card snapshots should match the vehicles snapshot if favorited vehicle card 1`] = `
+<article
+  className="vehicles Card"
+>
+  <button
+    className="favorite"
+    onClick={[Function]}
+  />
+  <h4>
+    X-Wing
+  </h4>
+  <h5>
+    | Model: 
+  </h5>
+  <p>
+    Giant Flying Thingy
+     
+  </p>
+  <h5>
+    | Class: 
+  </h5>
+  <p>
+    Small Jet
+  </p>
+  <h5>
+    | Passengers: 
+  </h5>
+  <p>
+    1
+  </p>
+</article>
+`;
+
+exports[`Card snapshots should match the vehicles snapshot if not favorited vehicle card 1`] = `
+<article
+  className="vehicles Card"
+>
+  <button
+    className=""
+    onClick={[Function]}
+  />
+  <h4>
+    AT-AT
+  </h4>
+  <h5>
+    | Model: 
+  </h5>
+  <p>
+    Giant Walking Thingy
+     
+  </p>
+  <h5>
+    | Class: 
+  </h5>
+  <p>
+    Real Big Vehicle
+  </p>
+  <h5>
+    | Passengers: 
+  </h5>
+  <p>
+    4
+  </p>
+</article>
+`;

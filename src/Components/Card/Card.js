@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Card.scss'
+import { getFavoriteInfo, getCardClass } from './CardHelpers';
+
 
 const Card = (props) => {
 
@@ -19,24 +21,6 @@ const Card = (props) => {
     handleFavorite,
     favorites
    } = props
-
-
-
-   let getFavoriteInfo = () => {
-
-    if (type === 'people') {
-      return { name, species, homeworld, population, language, type}
-    }
-
-    if (type === 'vehicles') {
-      return { name, model, vehicle_class, passengers, type}
-    }
-
-    if (type === 'planets') {
-      return { name, population, terrain, climate, residents, type}
-    }
-
-  }
 
   let peopleCard = 
     <>
@@ -77,23 +61,9 @@ const Card = (props) => {
     <p>{passengers}</p>
     </>;
 
-  
-  let getCardClass = () => {
-    if (favorites.map(favorite => favorite.name).includes(name)) {
-      return 'favorite'
-    } else {
-      return ''
-    }
-  }
-  
-
-  let handleFavoriteButton = (favoritedCard) => {
-    handleFavorite(favoritedCard);
-  }
-
   return(
     <article className={type + ' Card'}>
-      <button className={getCardClass()} onClick={() => handleFavoriteButton(getFavoriteInfo())}></button>
+      <button className={getCardClass(favorites, name)} onClick={() => handleFavorite(getFavoriteInfo(props))}></button>
         
       <h4>{name}</h4>
       

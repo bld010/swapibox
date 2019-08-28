@@ -66,7 +66,7 @@ export const fetchCards = (url, updateAppState, dataType, handleFetchError) => {
 
   const fetchResidents = (planetsArray) => {
     objToReturn= planetsArray;
-      objToReturn.map(planet => {
+      objToReturn.forEach((planet) => {
         let residentsPromises = planet.residents.map(resident => {
           return fetch(resident)
             .then(resp => resp.json())

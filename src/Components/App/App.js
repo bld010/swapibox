@@ -54,7 +54,6 @@ class App extends Component {
     this.setState({
       favorites: this.state.favorites.filter(favorite => favorite.name !== cardToRemove.name)
     })
-    console.log(this.state.favorites)
   }
 
   componentDidMount() {

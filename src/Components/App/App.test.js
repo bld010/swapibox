@@ -3,7 +3,6 @@ import App from './App';
 import { shallow, mount } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 import CardContainer from '../CardContainer/CardContainer';
-import { fetchMovie, fetchCards } from '../Fetch/Fetch'
 
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
