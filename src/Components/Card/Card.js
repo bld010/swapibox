@@ -77,17 +77,23 @@ const Card = (props) => {
     <p>{passengers}</p>
     </>;
 
-
+  
+  let getCardClass = () => {
+    if (favorites.map(favorite => favorite.name).includes(name)) {
+      return 'favorite'
+    } else {
+      return ''
+    }
+  }
   
 
   let handleFavoriteButton = (favoritedCard) => {
     handleFavorite(favoritedCard);
-    // toggleCardClass()
   }
 
   return(
     <article className={type + ' Card'}>
-      <button onClick={() => handleFavoriteButton(getFavoriteInfo())}></button>
+      <button className={getCardClass()} onClick={() => handleFavoriteButton(getFavoriteInfo())}></button>
         
       <h4>{name}</h4>
       
