@@ -6,12 +6,12 @@ Users are able to view a random text-crawl of a random Star Wars movie upon page
 
 ## Objectives 
 
-Write clean code that is purposeful in using extended Component classes versus functional components. 
-Create an easy-to-use UI. 
-Use the fetch API to access data, using Promises, and cleaning the data to serve the needs of the app. 
-Use React Router to create an app with multiple pages.
-Use Jest/Enzyme to test the app, including testing of some fetch calls and Route testing. 
-Use propTypes to verify proper props are passed between functions. 
+* Write clean code that is purposeful in using extended Component classes versus functional components. 
+* Create an easy-to-use UI. 
+* Use the fetch API to access data, using Promises, and cleaning the data to serve the needs of the app. 
+* Use React Router to create an app with multiple pages.
+* Use Jest/Enzyme to test the app, including testing of some fetch calls and Route testing. 
+* Use propTypes to verify proper props are passed between functions. 
 
 ## The Result
 
