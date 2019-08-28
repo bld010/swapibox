@@ -8,9 +8,11 @@ const TextCrawl = (props) => {
 
   return(
     <section className="TextCrawl">
-      <p>{props.movie && props.movie.opening_crawl}</p>
-      <p>{props.movie && props.movie.title}</p>
-      <p>{props.movie && props.movie.release_date}</p>
+      <div className="crawl">
+        <p>{props.movie && props.movie.opening_crawl}</p>
+        <p>{props.movie && props.movie.title}</p>
+        <p>{props.movie && props.movie.release_date}</p>
+      </div>
     </section>
   )
 }

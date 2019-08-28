@@ -11,7 +11,9 @@ const Header = ({ movie, favoritesCount }) => {
       <h1>SWAPIbox</h1>
       
         {movie !== null && <TextCrawl movie={movie}/>}
-        {movie === null && <div className="placeholder"></div>}
+        {movie === null && <div className="placeholder">
+          <h4>A long time ago in a galaxy far, far away ...</h4>
+        </div>}
       <nav>
         <NavLink to="/people">
           people

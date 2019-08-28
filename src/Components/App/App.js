@@ -49,7 +49,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.fetchMovie(this.updateAppState)
+    setTimeout(() => this.fetchMovie(this.updateAppState), 5000)
+    // this.fetchMovie(this.updateAppState)
     this.fetchCards('https://swapi.co/api/people/', this.updateAppState, 'people')
     this.fetchCards('https://swapi.co/api/planets/',  this.updateAppState, 'planets')
     this.fetchCards('https://swapi.co/api/vehicles/', this.updateAppState, 'vehicles')
@@ -62,7 +63,10 @@ class App extends Component {
           <Header favoritesCount={this.state.favorites.length} movie={this.state.movie} />
 
           <Route exact path="/" render={() => {
-            return <h2>Please select a link above to display people, planets, vehicles, or favorites.</h2>
+            return (<section className='CardContainer'>
+              <h2>Please select a link above to display people, planets, vehicles, or favorites.</h2>
+            
+            </section>)
           }} />
 
           <Route path='/people' render={() => {
