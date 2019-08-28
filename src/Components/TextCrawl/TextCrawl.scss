@@ -1,8 +1,8 @@
 .TextCrawl {
   width: 400px;
+  min-height: 300px;
   color: goldenrod;
   & p {
-
     text-justify: inter-character;
   }
 }

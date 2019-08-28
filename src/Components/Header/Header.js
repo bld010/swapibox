@@ -9,7 +9,9 @@ const Header = ({ movie, favoritesCount }) => {
   return(
     <header className="Header">
       <h1>SWAPIbox</h1>
+      
         {movie !== null && <TextCrawl movie={movie}/>}
+        {movie === null && <div className="placeholder"></div>}
       <nav>
         <NavLink to="/people">
           people

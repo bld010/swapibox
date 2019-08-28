@@ -9,6 +9,11 @@ $title-color: goldenrod;
   flex-direction: row;
   justify-content: space-around;
 
+  & .placeholder {
+    min-width: 400px;
+    min-height: 300px;
+  }
+
   & .active {
     color: $title-color;
     text-decoration: none;
