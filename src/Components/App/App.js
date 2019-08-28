@@ -91,12 +91,16 @@ class App extends Component {
 
           <Route path='/favorites' render={() => {
             if (this.state.favorites.length === 0) {
-              return <p>Please favorite some items by clicking the circle next to the name</p>
+              return <section className='CardContainer favorites'>
+                  <p>No favorites found.  Click on the circle next to the name of the person, 
+                  vehicle, or planet you'd like to favorite.</p>
+                </section>
             } else {
-              return <CardContainer 
-                favorites={this.state.favorites} 
-                handleFavorite={this.handleFavorite} 
-                cards={this.state.favorites} />
+                return <CardContainer 
+                  favorites={this.state.favorites} 
+                  handleFavorite={this.handleFavorite} 
+                  cards={this.state.favorites} 
+                  type='favorites' />
             }
           }} />
 

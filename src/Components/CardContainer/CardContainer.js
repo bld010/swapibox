@@ -5,7 +5,7 @@ import './CardContainer.scss'
 
 const CardContainer = ({ cards, type, handleFavorite, favorites }) => {
   return(
-    <section className="CardContainer">
+    <section className={type + " CardContainer"}>
       {cards !== null && cards.map(card => 
         <Card key={card.name} favorites={favorites} handleFavorite={handleFavorite} type={type} {...card}/>
       )}
